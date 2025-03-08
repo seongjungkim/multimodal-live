@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+websockets
+#redis  # Redis 클라이언트 라이브러리
+#aioredis # 비동기 Redis 클라이언트 (더 나은 성능)
+Jinja2==3.1.6
+
+google-genai
