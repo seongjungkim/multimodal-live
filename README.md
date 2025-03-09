@@ -4,6 +4,7 @@ Cloud Run에서 WebSocket을 사용하여 서버를 만드는 방법은 일반�
 
 스트리밍 오디오 및 동영상 형식에서 Multimodal Live API를 사용하는 방법의 예를 보려면 cookbooks 저장소에서 'Multimodal Live API - Quickstart' 파일을 실행하세요.
 
+
 [Multimodal Live API](https://ai.google.dev/gemini-api/docs/multimodal-live)  
 [Cloud Run용 WebSocket 채팅 서비스 빌드 튜토리얼](https://cloud.google.com/run/docs/tutorials/websockets)  
 [FastAPI WebSockets](https://fastapi.tiangolo.com/advanced/websockets/)  
@@ -14,12 +15,20 @@ Cloud Run에서 WebSocket을 사용하여 서버를 만드는 방법은 일반�
 [Google APIs Gen AI SDK](https://googleapis.github.io/python-genai/)  
 [Google Gen AI SDK for Python in Github](https://github.com/googleapis/python-genai)  
 
+
+[Use Gemini 2.0 to Build a Realtime Chat App with Multimodal Live API](https://www.youtube.com/watch?v=y2ETLEZ-oi8)  
+[Backend - Realtime Gemini 2.0 Mobile App for Voice Chat with Camera and Images](https://github.com/yeyu2/Youtube_demos/tree/main/gemini20-android/Backend)  
+
 [Source Repositories](https://source.developers.google.com/p/tpcg-datacollector/r/multimodal-live)
 
+
+## Source Repositories
 
 ```bash
 git remote add tpcg https://source.developers.google.com/p/tpcg-datacollector/r/multimodal-live)
 ```
+
+## Build and Deploy to Cloud Run
 
 ```bash
 # 프로젝트 ID 설정
@@ -47,8 +56,8 @@ gcloud config set project $PROJECT_ID
 gcloud builds submit --project=$PROJECT_ID --tag $TAG
 ```
 
-# 타임아웃 설정 (최대 1시간, 필요에 따라 조정)
-# 최대 인스턴스 수 (필요에 따라 조정)
+### 타임아웃 설정 (최대 1시간, 필요에 따라 조정)
+### 최대 인스턴스 수 (필요에 따라 조정)
 
 ```bash
 gcloud run deploy $APP \
@@ -61,7 +70,7 @@ gcloud run deploy $APP \
   --max-instances=10
 ```
 
-##
+## Run Multimodal Live Server on Compute Engine
 
 ```bash
 python main_for_mobile.py

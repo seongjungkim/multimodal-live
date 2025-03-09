@@ -164,7 +164,7 @@ class AudioLoop:
             print('Receiving audio', flush=True)
             turn = self.session.receive()
             async for response in turn:
-                print('response', response, flush=True)
+                #print('response', response, flush=True)
                 print('response.data', response.data, flush=True)
                 if data := response.data:
                     self.audio_in_queue.put_nowait(data)
@@ -186,12 +186,12 @@ class AudioLoop:
         try:
             while True:
                 bytestream = await self.audio_in_queue.get()
-                print('bytestream', bytestream, flush=True)
+                #print('bytestream', bytestream, flush=True)
                 #print("audio mime_type:", part.inline_data.mime_type)
                 base64_audio = base64.b64encode(bytestream).decode('utf-8')
                                             
                 sent_data = {"audio": base64_audio}
-                print('Sent audio', sent_data, flush=True)
+                #print('Sending audio', sent_data, flush=True)
                 await self.websocket.send_json(sent_data)
                 print('Sent audio', flush=True)
                 #self.audio_in_queue.task_done()
