@@ -15,7 +15,7 @@
         </ul>
         <script>
             //var ws = new WebSocket(`ws://localhost:8080/ws/{{uuid}}`); // Replace with your Cloud Run URL
-            var ws = new WebSocket(`wss://websocket-server-923091573679.asia-northeast3.run.app/ws/{{uuid}}`); // Replace with your Cloud Run URL
+            var ws = new WebSocket(`wss://websocket-server-923091573679.asia-northeast3.run.app/ws/{{uuid}}`);
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
@@ -25,7 +25,12 @@
             };
             function sendMessage(event) {
                 var input = document.getElementById("messageText")
-                ws.send(input.value)
+                console.log(input.value)
+                //ws.send(input.value)
+                json_string = JSON.stringify({ "message" : input.value })
+                ws.send(json_string)
+                //console.log(input.value + " is sent")
+                console.log(json_string + " is sent")
                 input.value = ''
                 event.preventDefault()
             }

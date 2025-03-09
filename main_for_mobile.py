@@ -26,7 +26,9 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
         config_data = json.loads(config_message)
         config = config_data.get("setup", {})
         
-        config["system_instruction"] = "You are a daily life assistant."
+        #config["system_instruction"] = "You are a daily life assistant."
+        config["system_instruction"] = {"instruction": "You are a daily life assistant."}
+        config = {"response_modalities": ["AUDIO"]}
         
 
         async with client.aio.live.connect(model=MODEL, config=config) as session:
@@ -41,8 +43,8 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
                           if "realtime_input" in data:
                               for chunk in data["realtime_input"]["media_chunks"]:
                                   if chunk["mime_type"] == "audio/pcm":
-                                      #print(f"Chunk data size: {len(chunk['data'])}")
-                                      #print(f"Sending audio chunk: {chunk['data'][:5]}")
+                                      print(f"Chunk data size: {len(chunk['data'])}")
+                                      print(f"Sending audio chunk: {chunk['data'][:5]}")
                                       await session.send(input={"mime_type": "audio/pcm", "data": chunk["data"]})
                                       
                                   elif chunk["mime_type"] == "image/jpeg":
