@@ -7,8 +7,12 @@ Cloud Run에서 WebSocket을 사용하여 서버를 만드는 방법은 일반�
 [Multimodal Live API](https://ai.google.dev/gemini-api/docs/multimodal-live)  
 [Cloud Run용 WebSocket 채팅 서비스 빌드 튜토리얼](https://cloud.google.com/run/docs/tutorials/websockets)  
 [FastAPI WebSockets](https://fastapi.tiangolo.com/advanced/websockets/)  
-[[FastAPI/Python] 양방향 통신을 위한 웹소켓 in FastAPI](https://dev-in-seoul.tistory.com/45?utm_source=chatgpt.com)  
 [GitHub - Multimodal Live API - Quickstart](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py)  
+[[FastAPI/Python] 양방향 통신을 위한 웹소켓 in FastAPI](https://dev-in-seoul.tistory.com/45?utm_source=chatgpt.com)  
+
+[Generative AI > Google Gen AI SDK](https://cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview)  
+[Google APIs Gen AI SDK](https://googleapis.github.io/python-genai/)  
+[Google Gen AI SDK for Python in Github](https://github.com/googleapis/python-genai)  
 
 [Source Repositories](https://source.developers.google.com/p/tpcg-datacollector/r/multimodal-live)
 

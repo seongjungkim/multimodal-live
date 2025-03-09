@@ -18,6 +18,13 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
 
 """
 https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py
+
+시스템 안내 (System Instructions):
+https://ai.google.dev/gemini-api/docs/multimodal-live?hl=ko#system-instructions
+
+함수 호출 사용 (Function Calling):
+https://ai.google.dev/gemini-api/docs/multimodal-live?hl=ko#function-calling
+https://github.com/yeyu2/Youtube_demos/blob/main/gemini20-realtime-function/main.py
 """
 
 GEN_API_KEY = os.environ.get("GEN_API_KEY", "")
@@ -26,15 +33,36 @@ MODEL = "gemini-2.0-flash-exp"  # use your model ID
 
 DEFAULT_MODE = "camera"
 
+google_search_tool = types.Tool(
+    google_search = types.GoogleSearch()
+)
+
+search_books = {
+    "function_declarations": [
+        {
+            "name": "search_books",
+            "description": "Retrieve books from the Google Books API.",
+            "parameters": {
+                "type": "OBJECT",
+                "properties": {
+
+                },
+                "required": [],
+            }
+        }
+    ]
+}
+
 CONFIG = {
     "system_instruction": types.Content(
         parts=[
             types.Part(
-                text="You are a helpful Korean assistant and answer in a friendly Korean."
-                #text="당신은 도움이 되는 한국인 조수이고 친절한 한국어로 대답해줍니다."
+                #text="You are a helpful Korean assistant and answer in a friendly Korean."
+                text="당신은 도움이 되는 한국인 조수이고 친절한 한국어로 대답해줍니다."
             )
         ]
     ),
+    "tools": [google_search_tool],
     "response_modalities": ["AUDIO"]
 }
 
@@ -52,6 +80,11 @@ if sys.version_info < (3, 11, 0):
 
     asyncio.TaskGroup = taskgroup.TaskGroup
     asyncio.ExceptionGroup = exceptiongroup.ExceptionGroup
+
+
+#
+def search_books():
+    return {}
 
 class AudioLoop:
     def __init__(self, video_mode=DEFAULT_MODE):
@@ -109,6 +142,12 @@ class AudioLoop:
                             # 이미지 청크 전송 (디버깅용 로그 - 실제 사용 시에는 제거)
                             # print(f"이미지 청크 전송: {chunk['data'][:50]}")
                             await self.session.send(input={"mime_type": mime_type, "data": chunk["data"]})
+
+                        elif mime_type == "plain/text":
+                            # 텍스트 청크 전송 (디버깅용 로그 - 실제 사용 시에는 제거)
+                            # print(f"텍스트 청크 전송: {chunk['data'][:50]}")
+                            await self.session.send(input=chunk["data"] or ".", end_of_turn=True)
+
         except WebSocketDisconnect:
             print("Client connection closed normally (receive)")
         except Exception as e:
