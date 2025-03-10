@@ -32,6 +32,8 @@ os.environ['GOOGLE_API_KEY'] = GEN_API_KEY
 MODEL = "gemini-2.0-flash-exp"  # use your model ID
 
 DEFAULT_MODE = "camera"
+#instruction_text = "You are a helpful Korean assistant and answer in a friendly Korean."
+instruction_text = "당신은 도움이 되는 한국인 조수이고 친절한 한국어로 대답해줍니다."
 
 google_search_tool = types.Tool(
     google_search = types.GoogleSearch()
@@ -57,8 +59,7 @@ CONFIG = {
     "system_instruction": types.Content(
         parts=[
             types.Part(
-                #text="You are a helpful Korean assistant and answer in a friendly Korean."
-                text="당신은 도움이 되는 한국인 조수이고 친절한 한국어로 대답해줍니다."
+                text=instruction_text
             )
         ]
     ),
